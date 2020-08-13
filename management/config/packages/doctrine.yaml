@@ -1,18 +1,30 @@
 doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
+        driver: 'pdo_pgsql'
+        server_version: '11.2'
 
-        # IMPORTANT: You MUST configure your server version,
-        # either here or in the DATABASE_URL env var (see .env file)
-        #server_version: '5.7'
+        types:
+            user_user_id: 'Ramsey\Uuid\Doctrine\UuidType'
+            user_user_email: 'App\Module\User\Entity\User\EmailType'
+            user_user_role: 'App\Module\User\Entity\User\RoleType'
+            user_user_status: 'App\Module\User\Entity\User\StatusType'
+            company_company_id: 'Ramsey\Uuid\Doctrine\UuidType'
+            company_company_status: 'App\Module\Company\Entity\Company\StatusType'
     orm:
         auto_generate_proxy_classes: true
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         auto_mapping: true
         mappings:
-            App:
+            User:
                 is_bundle: false
                 type: annotation
-                dir: '%kernel.project_dir%/src/Entity'
-                prefix: 'App\Entity'
-                alias: App
+                dir: '%kernel.project_dir%/src/Module/User/Entity/User'
+                prefix: 'App\Module\User\Entity\User'
+                alias: User
+            Company:
+                is_bundle: false
+                type: annotation
+                dir: '%kernel.project_dir%/src/Module/Company/Entity/Company'
+                prefix: 'App\Module\Company\Entity\Company'
+                alias: User

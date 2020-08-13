@@ -25,9 +25,9 @@ services:
       dockerfile: development/php-cli/Dockerfile
     volumes:
       - ./management:/app
-    depends_on:
-      - management-postgres
-      - mailer
+#    depends_on:
+#      - management-postgres
+#      - mailer
   management-postgres:
     image: postgres:11.2-alpine
     volumes:
