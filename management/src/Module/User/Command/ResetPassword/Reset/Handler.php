@@ -33,6 +33,9 @@ class Handler
         $this->flusher = $flusher;
     }
 
+    /**
+     * @param Command $command
+     */
     public function handler(Command $command): void
     {
         $user = $this->userRepository->findByPasswordResetToken($command->token);

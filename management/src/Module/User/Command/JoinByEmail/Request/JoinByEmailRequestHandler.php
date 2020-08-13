@@ -19,25 +19,21 @@ use App\Module\Company\Repository\CompanyRepositoryInterface;
 use App\Module\Flusher;
 use DateTimeImmutable;
 use DomainException;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 /**
  * Class Handler
  * @package App\Module\User\Command\JoinByEmail\Request
  */
-class Handler
+class JoinByEmailRequestHandler
 {
     private UserRepositoryInterface $userRepository;
-
     private CompanyRepositoryInterface $companyRepository;
-
     private Flusher $flusher;
-
     private Tokenizer $tokenizer;
-
     private PasswordHasher $passwordHasher;
-    /**
-     * @var JoinConfirmationSender
-     */
     private JoinConfirmationSender $sender;
 
     /**
@@ -66,9 +62,12 @@ class Handler
     }
 
     /**
-     * @param Command $command
+     * @param JoinByEmailRequestCommand $command
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
-    public function handle(Command $command): void
+    public function handle(JoinByEmailRequestCommand $command): void
     {
         $email = new Email($command->email);
 

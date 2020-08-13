@@ -14,10 +14,9 @@ use DomainException;
  * Class Handler
  * @package App\Module\User\Command\JoinByEmail\Confirm
  */
-class Handler
+class JoinByEmailConfirmHandler
 {
     private UserRepositoryInterface $userRepository;
-
     private Flusher $flusher;
 
     /**
@@ -32,9 +31,9 @@ class Handler
     }
 
     /**
-     * @param Command $command
+     * @param JoinByEmailConfirmCommand $command
      */
-    public function handle(Command $command): void
+    public function handle(JoinByEmailConfirmCommand $command): void
     {
         $user = $this->userRepository->findByJoinConfirmToken($command->token);
         if (!$user instanceof User) {

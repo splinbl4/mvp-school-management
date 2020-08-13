@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Class Command
  * @package App\Module\User\Command\JoinByEmail\Request
  */
-class Command
+class JoinByEmailRequestCommand
 {
     /**
      * @Assert\NotBlank()

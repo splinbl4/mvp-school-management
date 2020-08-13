@@ -8,7 +8,7 @@ namespace App\Module\User\Command\JoinByEmail\Confirm;
  * Class Command
  * @package App\Module\User\Command\JoinByEmail\Confirm
  */
-class Command
+class JoinByEmailConfirmCommand
 {
     public string $token = '';
 

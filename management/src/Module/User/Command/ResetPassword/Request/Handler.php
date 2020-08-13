@@ -10,6 +10,9 @@ use App\Module\User\Repository\UserRepositoryInterface;
 use App\Module\User\Service\PasswordResetTokenSender;
 use App\Module\User\Service\Tokenizer;
 use DateTimeImmutable;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 /**
  * Class Handler
@@ -18,15 +21,17 @@ use DateTimeImmutable;
 class Handler
 {
     private UserRepositoryInterface $userRepository;
-
     private Tokenizer $tokenizer;
-
     private Flusher $flusher;
-    /**
-     * @var PasswordResetTokenSender
-     */
     private PasswordResetTokenSender $sender;
 
+    /**
+     * Handler constructor.
+     * @param UserRepositoryInterface $userRepository
+     * @param Tokenizer $tokenizer
+     * @param Flusher $flusher
+     * @param PasswordResetTokenSender $sender
+     */
     public function __construct(
         UserRepositoryInterface $userRepository,
         Tokenizer $tokenizer,
@@ -39,6 +44,12 @@ class Handler
         $this->sender = $sender;
     }
 
+    /**
+     * @param Command $command
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     */
     public function handle(Command $command): void
     {
         $email = new Email($command->email);
