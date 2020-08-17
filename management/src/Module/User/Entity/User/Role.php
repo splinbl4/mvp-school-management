@@ -12,10 +12,10 @@ use Webmozart\Assert\Assert;
  */
 class Role
 {
-    public const USER = 'user';
-    public const TEACHER = 'teacher';
-    public const ADMIN = 'admin';
-    public const OWNER = 'owner';
+    public const USER = 'ROLE_USER';
+    public const TEACHER = 'ROLE_TEACHER';
+    public const ADMIN = 'ROLE_ADMIN';
+    public const OWNER = 'ROLE_OWNER';
 
     private string $name;
 

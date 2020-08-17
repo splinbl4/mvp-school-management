@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "34cfe4988a50e85188eed85a605870f4",
+    "content-hash": "32da249e262b7929969d7126137c6af5",
     "packages": [
         {
             "name": "brick/math",
@@ -1388,6 +1388,54 @@
             "time": "2020-08-08T21:28:19+00:00"
         },
         {
+            "name": "finesse/swiftmailer-defaults-plugin",
+            "version": "v2.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FinesseRus/SwiftMailerDefaultsPlugin.git",
+                "reference": "8b0a0e2cf230a8df02e4e8780192191a3c10582f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FinesseRus/SwiftMailerDefaultsPlugin/zipball/8b0a0e2cf230a8df02e4e8780192191a3c10582f",
+                "reference": "8b0a0e2cf230a8df02e4e8780192191a3c10582f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6",
+                "swiftmailer/swiftmailer": ">=4.0 <7.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.0",
+                "phpunit/phpunit": ">=5.4.3 <8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Finesse\\SwiftMailerDefaultsPlugin\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Surgie Finesse",
+                    "email": "finesserus@gmail.com"
+                }
+            ],
+            "description": "A plugin for SwiftMailer and Symfony that sets default properties for email Messages (from, sender, reply to and so on)",
+            "homepage": "https://github.com/FinesseRus/SwiftMailerDefaultsPlugin",
+            "keywords": [
+                "defaults",
+                "plugin",
+                "swiftmailer",
+                "symfony"
+            ],
+            "time": "2018-05-01T04:54:30+00:00"
+        },
+        {
             "name": "laminas/laminas-code",
             "version": "3.4.1",
             "source": {
@@ -2252,52 +2300,6 @@
                 }
             ],
             "time": "2020-07-28T16:51:01+00:00"
-        },
-        {
-            "name": "ramsey/uuid-doctrine",
-            "version": "1.6.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ramsey/uuid-doctrine.git",
-                "reference": "9facc4689547e72e03c1e18df4a0ee162b2778b0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid-doctrine/zipball/9facc4689547e72e03c1e18df4a0ee162b2778b0",
-                "reference": "9facc4689547e72e03c1e18df4a0ee162b2778b0",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/orm": "^2.5",
-                "php": "^5.4 | ^7 | ^8",
-                "ramsey/uuid": "^3.5 | ^4"
-            },
-            "require-dev": {
-                "jakub-onderka/php-parallel-lint": "^1",
-                "mockery/mockery": "^0.9 | ^1",
-                "phpunit/phpunit": "^4.8.36 | ^5.7 | ^6.5 | ^7",
-                "squizlabs/php_codesniffer": "^3.5"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Ramsey\\Uuid\\Doctrine\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Allow the use of ramsey/uuid as a Doctrine field type.",
-            "homepage": "https://github.com/ramsey/uuid-doctrine",
-            "keywords": [
-                "database",
-                "doctrine",
-                "guid",
-                "identifier",
-                "uuid"
-            ],
-            "time": "2020-01-27T05:09:17+00:00"
         },
         {
             "name": "sensio/framework-extra-bundle",

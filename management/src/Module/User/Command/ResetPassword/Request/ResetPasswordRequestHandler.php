@@ -18,7 +18,7 @@ use Twig\Error\SyntaxError;
  * Class Handler
  * @package App\Module\User\Command\ResetPassword\Request
  */
-class Handler
+class ResetPasswordRequestHandler
 {
     private UserRepositoryInterface $userRepository;
     private Tokenizer $tokenizer;
@@ -45,17 +45,15 @@ class Handler
     }
 
     /**
-     * @param Command $command
+     * @param ResetPasswordRequestCommand $command
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    public function handle(Command $command): void
+    public function handle(ResetPasswordRequestCommand $command): void
     {
         $email = new Email($command->email);
-
         $user = $this->userRepository->getByEmail($email);
-
         $date = new DateTimeImmutable();
         $token = $this->tokenizer->generate($date);
 

@@ -15,7 +15,7 @@ use DomainException;
  * Class Handler
  * @package App\Module\User\Command\ResetPassword\Reset
  */
-class Handler
+class ResetPasswordResetHandler
 {
     private UserRepositoryInterface $userRepository;
 
@@ -34,9 +34,9 @@ class Handler
     }
 
     /**
-     * @param Command $command
+     * @param ResetPasswordResetCommand $command
      */
-    public function handler(Command $command): void
+    public function handle(ResetPasswordResetCommand $command): void
     {
         $user = $this->userRepository->findByPasswordResetToken($command->token);
         if (!$user instanceof User) {

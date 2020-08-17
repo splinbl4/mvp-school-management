@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Auth\Join;
 
+use App\Controller\ErrorHandler;
 use App\Module\User\Command\JoinByEmail\Request\JoinByEmailRequestCommand;
 use App\Module\User\Command\JoinByEmail\Request\JoinByEmailRequestForm;
 use App\Module\User\Command\JoinByEmail\Request\JoinByEmailRequestHandler;
@@ -12,19 +13,36 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 /**
  * Class JoinRequest
  * @package App\Controller\Auth\Join
  */
-class JoinRequest extends AbstractController
+class RequestController extends AbstractController
 {
+    private ErrorHandler $errorHandler;
+
     /**
-     * @Route("/auth/join", name="auth.join")
+     * RequestAction constructor.
+     * @param ErrorHandler $errorHandler
+     */
+    public function __construct(ErrorHandler $errorHandler)
+    {
+        $this->errorHandler = $errorHandler;
+    }
+
+    /**
+     * @Route("/register", name="auth.join")
      *
      * @param Request $request
      * @param JoinByEmailRequestHandler $handler
      * @return Response
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     public function handle(Request $request, JoinByEmailRequestHandler $handler): Response
     {
@@ -38,8 +56,9 @@ class JoinRequest extends AbstractController
                 $handler->handle($command);
                 $this->addFlash('success', 'Check your email.');
                 return $this->redirectToRoute('home');
-            } catch (DomainException $e) {
-                $this->addFlash('error', $e->getMessage());
+            } catch (DomainException $exception) {
+                $this->errorHandler->handle($exception);
+                $this->addFlash('error', $exception->getMessage());
             }
         }
 

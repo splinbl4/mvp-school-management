@@ -16,18 +16,12 @@ services:
       dockerfile: development/php-fpm/Dockerfile
     volumes:
       - ./management:/app
-    depends_on:
-      - management-postgres
-      - mailer
   management-php-cli:
     build:
       context: management/docker
       dockerfile: development/php-cli/Dockerfile
     volumes:
       - ./management:/app
-#    depends_on:
-#      - management-postgres
-#      - mailer
   management-postgres:
     image: postgres:11.2-alpine
     volumes:
@@ -35,7 +29,7 @@ services:
     environment:
       POSTGRES_USER: app
       POSTGRES_PASSWORD: secret
-      POSTGRES_DB: app
+      POSTGRES_DB: management
     ports:
       - "54321:5432"
   mailer:

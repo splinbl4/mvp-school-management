@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200813180847 extends AbstractMigration
+final class Version20200816153408 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -21,13 +21,13 @@ final class Version20200813180847 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE company_companies (id UUID NOT NULL, name VARCHAR(255) NOT NULL, status VARCHAR(16) NOT NULL, PRIMARY KEY(id))');
-        $this->addSql('COMMENT ON COLUMN company_companies.id IS \'(DC2Type:uuid)\'');
+        $this->addSql('COMMENT ON COLUMN company_companies.id IS \'(DC2Type:company_company_id)\'');
         $this->addSql('COMMENT ON COLUMN company_companies.status IS \'(DC2Type:company_company_status)\'');
         $this->addSql('CREATE TABLE user_users (id UUID NOT NULL, company_id UUID NOT NULL, email VARCHAR(255) NOT NULL, password_hash VARCHAR(255) DEFAULT NULL, date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, status VARCHAR(16) NOT NULL, role VARCHAR(16) NOT NULL, new_email VARCHAR(255) DEFAULT NULL, name_first VARCHAR(255) NOT NULL, name_last VARCHAR(255) NOT NULL, join_confirm_token_value VARCHAR(255) DEFAULT NULL, join_confirm_token_expires TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, password_reset_token_value VARCHAR(255) DEFAULT NULL, password_reset_token_expires TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, new_email_token_value VARCHAR(255) DEFAULT NULL, new_email_token_expires TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_F6415EB1979B1AD6 ON user_users (company_id)');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_F6415EB1E7927C74 ON user_users (email)');
-        $this->addSql('COMMENT ON COLUMN user_users.id IS \'(DC2Type:uuid)\'');
-        $this->addSql('COMMENT ON COLUMN user_users.company_id IS \'(DC2Type:uuid)\'');
+        $this->addSql('COMMENT ON COLUMN user_users.id IS \'(DC2Type:user_user_id)\'');
+        $this->addSql('COMMENT ON COLUMN user_users.company_id IS \'(DC2Type:company_company_id)\'');
         $this->addSql('COMMENT ON COLUMN user_users.email IS \'(DC2Type:user_user_email)\'');
         $this->addSql('COMMENT ON COLUMN user_users.date IS \'(DC2Type:datetime_immutable)\'');
         $this->addSql('COMMENT ON COLUMN user_users.status IS \'(DC2Type:user_user_status)\'');

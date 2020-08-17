@@ -246,6 +246,7 @@ class User
 
         $this->joinConfirmToken->validate($token, $date);
         $this->status = Status::active();
+        $this->company->activate();
         $this->joinConfirmToken = null;
     }
 
