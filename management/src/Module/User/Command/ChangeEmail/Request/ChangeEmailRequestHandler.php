@@ -12,12 +12,15 @@ use App\Module\User\Service\NewEmailConfirmTokenSender;
 use App\Module\User\Service\Tokenizer;
 use DateTimeImmutable;
 use DomainException;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 /**
  * Class Handler
  * @package App\Module\User\Command\ChangeEmail\Request
  */
-class Handler
+class ChangeEmailRequestHandler
 {
     private UserRepositoryInterface $userRepository;
 
@@ -27,6 +30,13 @@ class Handler
 
     private Flusher $flusher;
 
+    /**
+     * ChangeEmailRequestHandler constructor.
+     * @param UserRepositoryInterface $userRepository
+     * @param Tokenizer $tokenizer
+     * @param NewEmailConfirmTokenSender $sender
+     * @param Flusher $flusher
+     */
     public function __construct(
         UserRepositoryInterface $userRepository,
         Tokenizer $tokenizer,
@@ -39,7 +49,13 @@ class Handler
         $this->flusher = $flusher;
     }
 
-    public function handle(Command $command): void
+    /**
+     * @param ChangeEmailRequestCommand $command
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     */
+    public function handle(ChangeEmailRequestCommand $command): void
     {
         $user = $this->userRepository->get(new Id($command->id));
         $email = new Email($command->email);

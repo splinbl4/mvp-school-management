@@ -5,16 +5,15 @@ declare(strict_types=1);
 namespace App\Module\User\Command\ChangeEmail\Confirm;
 
 use App\Module\Flusher;
-use App\Module\User\Entity\User\User;
+use App\Module\User\Entity\User\Id;
 use App\Module\User\Repository\UserRepositoryInterface;
 use DateTimeImmutable;
-use DomainException;
 
 /**
  * Class Handler
  * @package App\Module\User\Command\ChangeEmail\Confirm
  */
-class Handler
+class ChangeEmailConfirmHandler
 {
     private UserRepositoryInterface $userRepository;
 
@@ -26,13 +25,9 @@ class Handler
         $this->flusher = $flusher;
     }
 
-    public function handle(Command $command): void
+    public function handle(ChangeEmailConfirmCommand $command): void
     {
-        $user = $this->userRepository->findByNewEmailToken($command->token);
-
-        if (!$user instanceof User) {
-            throw new DomainException('Incorrect token.');
-        }
+        $user = $this->userRepository->get(new Id($command->id));
 
         $user->confirmEmailChanging($command->token, new DateTimeImmutable());
 
