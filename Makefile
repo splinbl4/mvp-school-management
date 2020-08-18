@@ -7,7 +7,7 @@ docker-down:
 docker-down-clear:
 	docker-compose down -v --remove-orphans
 
-management-init: management-composer-install management-wait-db management-migrations
+management-init: management-composer-install management-wait-db management-migrations manager-fixtures
 
 management-composer-install:
 	docker-compose run --rm management-php-cli composer install
@@ -20,3 +20,6 @@ management-migrations:
 
 management-validate-schema:
 	docker-compose run --rm management-php-cli php bin/console doctrine:schema:validate
+
+manager-fixtures:
+	docker-compose run --rm management-php-cli php bin/console doctrine:fixtures:load --no-interaction
