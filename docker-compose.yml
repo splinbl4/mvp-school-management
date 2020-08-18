@@ -22,6 +22,17 @@ services:
       dockerfile: development/php-cli/Dockerfile
     volumes:
       - ./management:/app
+  management-node-watch:
+    image: node:12.7-alpine
+    volumes:
+      - ./management:/app
+    working_dir: /app
+    command: sh -c "until [ -f .ready ] ; do sleep 1 ; done && npm run watch"
+  management-node:
+    image: node:12.7-alpine
+    volumes:
+      - ./management:/app
+    working_dir: /app
   management-postgres:
     image: postgres:11.2-alpine
     volumes:
