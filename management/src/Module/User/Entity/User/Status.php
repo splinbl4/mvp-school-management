@@ -17,6 +17,11 @@ class Status
 
     private string $name;
 
+    private static array $statusNameMap = [
+        self::WAIT => 'Wait',
+        self::ACTIVE => 'Active'
+    ];
+
     public function __construct(string $name)
     {
         Assert::oneOf($name, [
@@ -49,5 +54,10 @@ class Status
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getDisplayName(): string
+    {
+        return self::$statusNameMap[$this->name];
     }
 }

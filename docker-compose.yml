@@ -14,12 +14,20 @@ services:
     build:
       context: management/docker
       dockerfile: development/php-fpm/Dockerfile
+    environment:
+      APP_ENV: dev
+      APP_DEBUG: 1
+      PHP_IDE_CONFIG: serverName=API
     volumes:
       - ./management:/app
   management-php-cli:
     build:
       context: management/docker
       dockerfile: development/php-cli/Dockerfile
+    environment:
+      APP_ENV: dev
+      APP_DEBUG: 1
+      PHP_IDE_CONFIG: serverName=API
     volumes:
       - ./management:/app
   management-node-watch:

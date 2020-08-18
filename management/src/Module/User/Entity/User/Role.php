@@ -19,6 +19,13 @@ class Role
 
     private string $name;
 
+    private static array $roleNameMap = [
+        self::USER => 'User',
+        self::TEACHER => 'Teacher',
+        self::ADMIN => 'Admin',
+        self::OWNER => 'Owner',
+    ];
+
     public function __construct(string $name)
     {
         Assert::oneOf($name, [
@@ -54,5 +61,10 @@ class Role
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getDisplayName(): string
+    {
+        return self::$roleNameMap[$this->name];
     }
 }
