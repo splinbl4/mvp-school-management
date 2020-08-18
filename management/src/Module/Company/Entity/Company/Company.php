@@ -41,4 +41,12 @@ class Company
     {
         $this->status = Status::active();
     }
+
+    /**
+     * @return Id
+     */
+    public function getId(): Id
+    {
+        return $this->id;
+    }
 }

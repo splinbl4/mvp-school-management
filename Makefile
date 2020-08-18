@@ -21,5 +21,8 @@ management-migrations:
 management-validate-schema:
 	docker-compose run --rm management-php-cli php bin/console doctrine:schema:validate
 
-manager-fixtures:
+management-fixtures:
 	docker-compose run --rm management-php-cli php bin/console doctrine:fixtures:load --no-interaction
+
+management-test:
+	docker-compose run --rm management-php-cli php bin/phpunit

@@ -31,7 +31,7 @@ class User
     /**
      * @ORM\Column(type="user_user_email", unique=true)
      */
-    private ?Email $email = null;
+    private Email $email;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -84,6 +84,14 @@ class User
      */
     private Company $company;
 
+    /**
+     * User constructor.
+     * @param Id $id
+     * @param DateTimeImmutable $date
+     * @param Name $name
+     * @param Role $role
+     * @param Company $company
+     */
     private function __construct(
         Id $id,
         DateTimeImmutable $date,
@@ -99,6 +107,17 @@ class User
         $this->status = Status::wait();
     }
 
+    /**
+     * @param Id $id
+     * @param DateTimeImmutable $date
+     * @param Name $name
+     * @param Role $role
+     * @param Company $company
+     * @param Email $email
+     * @param string $hash
+     * @param Token $token
+     * @return static
+     */
     public static function joinByEmail(
         Id $id,
         DateTimeImmutable $date,
@@ -117,13 +136,22 @@ class User
         return $user;
     }
 
+    /**
+     * @param Id $id
+     * @param DateTimeImmutable $date
+     * @param Name $name
+     * @param Role $role
+     * @param Company $company
+     * @param Email $email
+     * @return static
+     */
     public static function create(
         Id $id,
         DateTimeImmutable $date,
         Name $name,
         Role $role,
         Company $company,
-        Email $email = null
+        Email $email
     ): self {
         $user = new self($id, $date, $name, $role, $company);
         $user->email = $email;
@@ -141,9 +169,9 @@ class User
     }
 
     /**
-     * @return Email|null
+     * @return Email
      */
-    public function getEmail(): ?Email
+    public function getEmail(): Email
     {
         return $this->email;
     }
@@ -314,10 +342,6 @@ class User
             throw new DomainException('User is not active.');
         }
 
-        if ($this->email === null) {
-            throw new DomainException('User does not have an old email.');
-        }
-
         if ($this->email->isEqualTo($email)) {
             throw new DomainException('Email is already same.');
         }
@@ -336,7 +360,7 @@ class User
             throw new DomainException('Changing is not requested.');
         }
         $this->newEmailToken->validate($token, $date);
-        $this->email = $this->newEmail;
+        $this->email = $this->newEmail ?? $this->email;
         $this->newEmail = null;
         $this->newEmailToken = null;
     }
